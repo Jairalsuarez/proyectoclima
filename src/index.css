@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  color: #e7ecff;
+  background:
+    radial-gradient(circle at top left, rgba(92, 105, 255, 0.2), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(74, 227, 214, 0.12), transparent 24%),
+    linear-gradient(135deg, #080918 0%, #101323 52%, #090b17 100%);
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: transparent;
+}
+
+button,
+a,
+input,
+select {
+  font: inherit;
+}
+
+button:not(:disabled),
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(126, 135, 255, 0.35);
+}
