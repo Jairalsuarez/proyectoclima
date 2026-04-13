@@ -8,15 +8,7 @@ function LocationPinIcon() {
   )
 }
 
-function TargetIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
-      <path d="M12 8a4 4 0 100 8 4 4 0 000-8zm9-1h-2.07A7.971 7.971 0 0017 5.07V3h-2v2.07A7.971 7.971 0 0013 3V1h-2v2.07A7.971 7.971 0 009.07 5H7v2.07A7.971 7.971 0 005.07 9H3v2h2.07A7.971 7.971 0 003 13v2h2.07A7.971 7.971 0 007 17v2h2v-2.07A7.971 7.971 0 0011 21v2h2v-2.07A7.971 7.971 0 0015 19v2h2v-2.07A7.971 7.971 0 0019 15H21v-2h-2.07A7.971 7.971 0 0021 11V9zm-9 10a6 6 0 110-12 6 6 0 010 12z" />
-    </svg>
-  )
-}
-
-export function CurrentWeatherPanel({ weather, unit, onOpenSearch, onRefreshLocation }) {
+export function CurrentWeatherPanel({ weather, unit }) {
   const mainTemp = Math.round(unit === 'F' ? (weather.temp * 9) / 5 + 32 : weather.temp)
 
   return (
@@ -26,26 +18,7 @@ export function CurrentWeatherPanel({ weather, unit, onOpenSearch, onRefreshLoca
       <div className="absolute -bottom-4 left-0 h-36 w-36 rounded-full bg-white/6 blur-sm" />
       <div className="absolute right-6 bottom-40 h-16 w-16 rounded-full bg-white/5 blur-sm" />
 
-      <div className="relative z-10 flex items-center justify-between gap-4">
-        <button
-          type="button"
-          onClick={onOpenSearch}
-          className="rounded-2xl bg-white/14 px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-white/20"
-        >
-          Search for Places
-        </button>
-
-        <button
-          type="button"
-          onClick={onRefreshLocation}
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-white/14 text-white transition hover:-translate-y-0.5 hover:bg-white/20"
-          aria-label="Use current location"
-        >
-          <TargetIcon />
-        </button>
-      </div>
-
-      <div className="relative z-10 mt-10 flex flex-col items-center text-center">
+      <div className="relative z-10 mt-16 flex flex-col items-center text-center">
         <img
           src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
           alt={weather.description}
