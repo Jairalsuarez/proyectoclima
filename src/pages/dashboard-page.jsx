@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Search, ChevronRight } from 'lucide-react'
 import { ErrorState } from '../components/shared/error-state.jsx'
 import { Loader } from '../components/shared/loader.jsx'
 import { CurrentWeatherPanel } from '../components/weather/current-weather-panel.jsx'
@@ -81,18 +82,18 @@ export function DashboardPage() {
           />
         </div>
 
-        <section className="rounded-[2rem] border border-white/6 bg-[#090d1d]/75 p-6 shadow-[0_26px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:p-8">
+        <section className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl sm:p-8">
           {warning ? (
-            <div className="mb-6 rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-sm text-amber-100">
+            <div className="mb-6 rounded-2xl border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
               {warning}
             </div>
           ) : null}
 
           <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
             <div>
-              <p className="text-sm uppercase tracking-[0.32em] text-cyan-300/80">Live forecast</p>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                Climate overview for {weather.current.city}
+              <p className="text-sm font-medium uppercase tracking-wider text-slate-400">Live forecast</p>
+              <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl">
+                Overview for {weather.current.city}
               </h1>
             </div>
 
@@ -106,10 +107,8 @@ export function DashboardPage() {
                   }}
                   className="flex items-center gap-3"
                 >
-                  <div className="flex flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-                    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-slate-400">
-                      <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
-                    </svg>
+                  <div className="flex flex-1 items-center gap-3 rounded-2xl border border-slate-700 bg-slate-950/50 px-4 py-3 transition-colors focus-within:border-slate-500">
+                    <Search className="h-5 w-5 text-slate-400" />
                     <input
                       value={searchQuery}
                       onFocus={() => setSearchFocused(true)}
@@ -119,55 +118,53 @@ export function DashboardPage() {
                       onChange={(event) => {
                         setSearchQuery(event.target.value)
                       }}
-                      placeholder="Search places in real time"
-                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-slate-400"
+                      placeholder="Search places..."
+                      className="w-full bg-transparent text-sm text-slate-50 outline-none placeholder:text-slate-500"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="rounded-2xl bg-gradient-to-r from-indigo-400 to-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5"
+                    className="rounded-2xl bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-200 active:scale-95"
                   >
                     Search
                   </button>
                 </form>
 
                 {showSearchDropdown ? (
-                  <div className="absolute left-0 right-0 top-[calc(100%+0.75rem)] z-30 rounded-[1.5rem] border border-white/10 bg-[#141935] p-3 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+                  <div className="absolute left-0 right-0 top-[calc(100%+0.75rem)] z-30 rounded-2xl border border-slate-700 bg-slate-900 p-3 shadow-2xl">
                     {searching ? (
-                      <div className="space-y-3">
+                      <div className="space-y-2">
                         {[1, 2, 3].map((item) => (
-                          <div key={item} className="h-[72px] animate-pulse rounded-2xl border border-white/10 bg-white/5 p-5" />
+                          <div key={item} className="h-16 animate-pulse rounded-xl bg-slate-800" />
                         ))}
                       </div>
                     ) : null}
 
                     {!searching && searchError ? (
-                      <div className="rounded-2xl border border-amber-300/20 bg-amber-400/10 p-4 text-sm text-amber-100">
+                      <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4 text-sm text-amber-200">
                         {searchError}
                       </div>
                     ) : null}
 
                     {!searching && !searchError ? (
-                      <div className="max-h-[340px] space-y-3 overflow-y-auto pr-1">
+                      <div className="max-h-[340px] space-y-2 overflow-y-auto pr-1">
                         {searchResults.map((city) => (
                           <button
                             key={city.id}
                             type="button"
                             onMouseDown={(event) => event.preventDefault()}
                             onClick={() => handleSelectCity(city)}
-                            className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-left transition hover:border-cyan-300/35 hover:bg-white/10"
+                            className="flex w-full items-center justify-between rounded-xl p-4 text-left transition hover:bg-slate-800"
                           >
                             <div>
-                              <p className="font-medium text-white">{city.name}</p>
-                              <p className="mt-1 text-sm text-slate-300">
+                              <p className="font-medium text-slate-50">{city.name}</p>
+                              <p className="mt-1 text-xs text-slate-400">
                                 {[city.state, city.country].filter(Boolean).join(', ')}
                               </p>
                             </div>
 
-                            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-slate-400">
-                              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
-                            </svg>
+                            <ChevronRight className="h-5 w-5 text-slate-500" />
                           </button>
                         ))}
                       </div>
@@ -176,17 +173,17 @@ export function DashboardPage() {
                 ) : null}
               </div>
 
-              <div className="flex items-center gap-3 self-start xl:self-end">
+              <div className="flex items-center gap-2 self-start xl:self-end bg-slate-800/50 p-1 rounded-full border border-slate-700/50">
                 {['C', 'F'].map((value) => (
                   <button
                     key={value}
                     type="button"
                     onClick={() => setUnit(value)}
                     className={cn(
-                      'flex h-12 w-12 items-center justify-center rounded-full border text-lg font-semibold transition',
+                      'flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium transition',
                       unit === value
-                        ? 'border-white bg-white text-slate-950'
-                        : 'border-white/10 bg-white/5 text-white hover:bg-white/10',
+                        ? 'bg-slate-50 text-slate-900 shadow'
+                        : 'text-slate-400 hover:text-slate-200',
                     )}
                   >
                     {String.fromCharCode(176)}
@@ -199,13 +196,13 @@ export function DashboardPage() {
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
             {weather.forecast.map((item) => (
-              <ForecastCard key={item.id} item={item} unit={unit} />
+               <ForecastCard key={item.id} item={item} unit={unit} />
             ))}
           </div>
 
           <HighlightsGrid weather={weather.current} unit={unit} />
 
-          <footer className="mt-10 text-center text-sm text-slate-400">
+          <footer className="mt-10 text-center text-sm text-slate-500">
             Powered by OpenWeather.
           </footer>
         </section>

@@ -1,12 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
-  color: #e7ecff;
-  background:
-    radial-gradient(circle at top left, rgba(92, 105, 255, 0.2), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(74, 227, 214, 0.12), transparent 24%),
-    linear-gradient(135deg, #080918 0%, #101323 52%, #090b17 100%);
+  font-family: "Plus Jakarta Sans", "Inter", "Segoe UI", sans-serif;
+  color: #f8fafc;
+  background-color: #020617;
   color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;

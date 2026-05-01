@@ -1,51 +1,47 @@
+import { MapPin, Calendar } from 'lucide-react'
 import { formatLongDate } from '../../utils/formatters.js'
-
-function LocationPinIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
-      <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
-    </svg>
-  )
-}
 
 export function CurrentWeatherPanel({ weather, unit }) {
   const mainTemp = Math.round(unit === 'F' ? (weather.temp * 9) / 5 + 32 : weather.temp)
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-white/8 bg-gradient-to-b from-[#1d2240] via-[#161b34] to-[#12162d] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.35)] lg:min-h-[820px]">
-      <div className="absolute -left-8 top-[4.5rem] h-28 w-28 rounded-full bg-white/6 blur-sm" />
-      <div className="absolute right-[-40px] top-28 h-24 w-24 rounded-full bg-white/5 blur-sm" />
-      <div className="absolute -bottom-4 left-0 h-36 w-36 rounded-full bg-white/6 blur-sm" />
-      <div className="absolute right-6 bottom-40 h-16 w-16 rounded-full bg-white/5 blur-sm" />
+    <section className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl xl:min-h-[700px]">
+      <div className="flex flex-1 flex-col items-center justify-center text-center">
+        <div className="rounded-full bg-slate-800/50 p-4 ring-1 ring-slate-700/50">
+          <img
+            src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
+            alt={weather.description}
+            className="h-32 w-32 drop-shadow-lg"
+          />
+        </div>
 
-      <div className="relative z-10 mt-16 flex flex-col items-center text-center">
-        <img
-          src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
-          alt={weather.description}
-          className="h-[168px] w-[168px] drop-shadow-[0_30px_40px_rgba(0,0,0,0.35)]"
-        />
-
-        <div className="mt-7 flex items-start gap-2">
-          <span className="text-7xl font-semibold text-white md:text-8xl">{mainTemp}</span>
-          <span className="pt-3 text-4xl font-light text-slate-300">
-            {String.fromCharCode(176)}
-            {unit}
+        <div className="mt-8 flex items-start gap-1">
+          <span className="text-8xl font-bold tracking-tighter text-slate-50 md:text-9xl">
+            {mainTemp}
+          </span>
+          <span className="pt-4 text-4xl font-light text-slate-400 md:text-5xl">
+            {String.fromCharCode(176)}{unit}
           </span>
         </div>
 
-        <p className="mt-8 text-3xl font-semibold tracking-tight text-slate-200">
+        <p className="mt-6 text-2xl font-medium tracking-tight text-slate-200 capitalize">
           {weather.description}
         </p>
 
-        <div className="mt-8 flex items-center gap-3 text-sm text-slate-300">
-          <span>Today</span>
-          <span className="text-slate-500">.</span>
-          <span>{formatLongDate(weather.date)}</span>
-        </div>
+        <div className="mt-8 h-px w-16 bg-slate-800" />
 
-        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm text-slate-200">
-          <LocationPinIcon />
-          <span>{weather.locationLabel}</span>
+        <div className="mt-8 flex flex-col items-center gap-4 text-slate-400">
+          <div className="flex items-center gap-2">
+            <Calendar className="h-4 w-4" />
+            <span className="text-sm font-medium">Today</span>
+            <span>&bull;</span>
+            <span className="text-sm">{formatLongDate(weather.date)}</span>
+          </div>
+
+          <div className="inline-flex items-center gap-2 rounded-xl bg-slate-800/50 px-4 py-2 ring-1 ring-slate-700/50">
+            <MapPin className="h-4 w-4 text-slate-300" />
+            <span className="text-sm font-medium text-slate-200">{weather.locationLabel}</span>
+          </div>
         </div>
       </div>
     </section>

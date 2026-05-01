@@ -2,23 +2,21 @@ import { formatTemperature } from '../../utils/formatters.js'
 
 export function ForecastCard({ item, unit }) {
   return (
-    <article className="group rounded-[1.75rem] border border-white/8 bg-white/[0.04] p-5 shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-white/[0.07]">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="font-semibold text-white">{item.dayLabel}</p>
-          <p className="mt-1 text-sm text-slate-400">{item.fullDate}</p>
-        </div>
+    <article className="group flex flex-col items-center justify-between rounded-2xl border border-slate-700/50 bg-slate-800/20 p-5 transition-all hover:bg-slate-800/50">
+      <div className="text-center">
+        <p className="font-medium text-slate-200">{item.dayLabel}</p>
+        <p className="mt-1 text-xs text-slate-500">{item.fullDate}</p>
       </div>
 
       <img
         src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}
         alt={item.description}
-        className="mx-auto my-5 h-20 w-20 transition group-hover:scale-105"
+        className="my-3 h-16 w-16 drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
       />
 
-      <div className="flex items-center justify-center gap-3 text-sm">
-        <span className="font-semibold text-white">{formatTemperature(item.max, unit)}</span>
-        <span className="text-slate-400">{formatTemperature(item.min, unit)}</span>
+      <div className="flex items-center gap-3 text-sm">
+        <span className="font-semibold text-slate-50">{formatTemperature(item.max, unit)}</span>
+        <span className="font-medium text-slate-400">{formatTemperature(item.min, unit)}</span>
       </div>
     </article>
   )
